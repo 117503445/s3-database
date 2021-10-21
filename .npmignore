@@ -1,0 +1,9 @@
+.github
+.gitattributes
+config/
+src/
+test/
+.gitignore
+.npmignore
+tsconfig.*
+tslint.json
