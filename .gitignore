@@ -77,3 +77,4 @@ typings/
 
 *.tsbuildinfo
 lib/
+test/config/conf.json
