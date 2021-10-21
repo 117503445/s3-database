@@ -1,15 +1,16 @@
 {
-  "name": "@t117503445/npm-package-typescript",
+  "name": "@t117503445/s3-database",
   "version": "0.1.0",
-  "description": "demo for npm package with typescript",
+  "description": "JavaScript SDK uses S3 as the database and does not require a backend.",
   "main": "index.js",
   "scripts": {
     "build": "tsc -p ./config/tsconfig.build.json",
     "test": "ts-mocha -p ./config/tsconfig.test.json ./test/*"
   },
-  "keywords": [
-    "NPM",
-    "TypeScript"
+  "keywords":  [
+    "S3",
+    "CRUD",
+    "REST"
   ],
   "author": "117503445",
   "license": "GPL-3.0-or-later",
