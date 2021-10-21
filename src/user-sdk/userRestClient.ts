@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:50:37
  * @Description:
- * @LastEditTime: 2021-10-22 01:01:33
+ * @LastEditTime: 2021-10-22 01:29:30
  * @LastEditors: HaoTian Qi
  */
 
@@ -15,14 +15,23 @@ export default class UserRestClient {
     this.host = host;
     this.name = name;
   }
-  async getAll(){
+  async getAll(): Promise<any[] | undefined> {
     let url = `${this.host}/${this.name}`;
     let response = await axios.get(url);
-    return response.data;
+
+    let data: any = response.data;
+    if (Array.isArray(data)) {
+      return data;
+    } else {
+      return undefined;
+    }
   }
 
   async getOne(index: number) {
     let items = await this.getAll();
+    if (typeof items == "undefined") {
+      return undefined;
+    }
     return items[index];
   }
 }
