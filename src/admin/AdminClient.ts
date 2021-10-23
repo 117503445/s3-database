@@ -1,8 +1,8 @@
 /*
  * @Author: HaoTian Qi
- * @Date: 2021-10-22 00:51:01
+ * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-10-22 01:28:38
+ * @LastEditTime: 2021-10-23 10:55:20
  * @LastEditors: HaoTian Qi
  */
 
@@ -10,17 +10,14 @@ import {
   S3Client,
   GetObjectCommand,
   PutObjectCommand,
-  S3ClientConfig,
 } from "@aws-sdk/client-s3";
 import { Readable } from "stream";
 
-interface AdminClientConfig extends S3ClientConfig {
-  Bucket: string;
-}
+import AdminClientConfig from "./AdminClientConfig";
 
 function streamToString(stream: Readable): Promise<string> {
   // https://stackoverflow.com/a/49428486/12608675
-  const chunks: Array<any>  = [];
+  const chunks: Array<any> = [];
   return new Promise((resolve, reject) => {
     stream.on(
       "data",
@@ -32,7 +29,7 @@ function streamToString(stream: Readable): Promise<string> {
   });
 }
 
-export default class AdminRestClient {
+export default class AdminClient {
   s3client: S3Client;
   name: string;
   bucket: string;
@@ -41,14 +38,11 @@ export default class AdminRestClient {
     this.name = name;
     this.bucket = conf.Bucket;
   }
-
-  async getAll() {
-    // 返回 items 数组
+  async get() {
+    // 返回文件对应的 JS 对象
     // 文件不存在 / 结构不合法 返回 undefined
 
     // TODO 文件不存在的情况
-    // TODO JSON 结构不合法 的情况
-    // TODO 合法 JSON 不是数组的情况
 
     let input = { Bucket: this.bucket, Key: this.name };
     const command = new GetObjectCommand(input);
@@ -62,49 +56,12 @@ export default class AdminRestClient {
     }
   }
 
-  setAll(content: any) {
+  async set(content: any) {
     if (typeof content != "string") {
       content = JSON.stringify(content);
     }
     let input = { Bucket: this.bucket, Body: content, Key: this.name };
     const command = new PutObjectCommand(input);
     return this.s3client.send(command);
-  }
-
-  async deleteAll() {
-    await this.setAll([]);
-  }
-
-  async deleteOne(index: number) {
-    let items = await this.getAll();
-    items.splice(index, 1);
-    await this.setAll(items);
-  }
-
-  async available() {
-    let items = await this.getAll();
-    return !(typeof items == "undefined");
-  }
-
-  async init() {
-    if (!(await this.available())) {
-      await this.deleteAll();
-    }
-  }
-
-  async createOne(item: any) {
-    let items = await this.getAll();
-    if (typeof items == "undefined") {
-      this.setAll([item]);
-    } else {
-      items.push(item);
-      this.setAll(items);
-    }
-  }
-
-  async updateOne(index: number, item: any) {
-    let items = await this.getAll();
-    items[index] = item;
-    await this.setAll(items);
   }
 }

@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:50:37
  * @Description:
- * @LastEditTime: 2021-10-22 01:29:30
+ * @LastEditTime: 2021-10-23 10:45:47
  * @LastEditors: HaoTian Qi
  */
 
@@ -15,7 +15,7 @@ export default class UserRestClient {
     this.host = host;
     this.name = name;
   }
-  async getAll(): Promise<any[] | undefined> {
+  async getAll(): Promise<object[] | undefined> {
     let url = `${this.host}/${this.name}`;
     let response = await axios.get(url);
 
