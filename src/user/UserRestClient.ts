@@ -2,24 +2,15 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:50:37
  * @Description:
- * @LastEditTime: 2021-10-23 10:45:47
+ * @LastEditTime: 2021-10-23 13:02:13
  * @LastEditors: HaoTian Qi
  */
 
-import axios from "axios";
+import UserClient from "./UserClient";
 
-export default class UserRestClient {
-  host: string;
-  name: string;
-  constructor(host: string, name: string) {
-    this.host = host;
-    this.name = name;
-  }
+export default class UserRestClient extends UserClient {
   async getAll(): Promise<object[] | undefined> {
-    let url = `${this.host}/${this.name}`;
-    let response = await axios.get(url);
-
-    let data: any = response.data;
+    let data = await this.get();
     if (Array.isArray(data)) {
       return data;
     } else {
