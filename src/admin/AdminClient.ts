@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-10-23 10:55:20
+ * @LastEditTime: 2021-10-29 00:29:42
  * @LastEditors: HaoTian Qi
  */
 
@@ -33,15 +33,20 @@ export default class AdminClient {
   s3client: S3Client;
   name: string;
   bucket: string;
+  /**
+   * Admin 操作文件的 Client
+   */
   constructor(conf: AdminClientConfig, name: string) {
     this.s3client = new S3Client(conf);
     this.name = name;
     this.bucket = conf.Bucket;
   }
+  /**
+   * 读取文件
+   *
+   * @returns 返回 JS 对象, 文件不存在 / 结构不合法 返回 undefined
+   */
   async get() {
-    // 返回文件对应的 JS 对象
-    // 文件不存在 / 结构不合法 返回 undefined
-
     // TODO 文件不存在的情况
 
     let input = { Bucket: this.bucket, Key: this.name };
@@ -55,7 +60,11 @@ export default class AdminClient {
       return undefined;
     }
   }
-
+  /**
+   * 写入文件
+   *
+   * @param content - 要写入的 JS 对象
+   */
   async set(content: any) {
     if (typeof content != "string") {
       content = JSON.stringify(content);

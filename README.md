@@ -6,7 +6,7 @@ JavaScript SDK uses S3 as the data source, to build applications that don't need
 
 对于某些简单的数据请求，完全可以将其放置在对象储存中，由前端进行直接的存取，可以构建不需要后端的应用程序。基于 s3-database 提供的 SDK，前端可以存取非结构化的 JS 对象数据，也可以使用 REST 风格的接口操作结构化的数据。
 
-s3-database 的权限控制基于对象储存本身。匿名用户通过 user-sdk 可以读取资源，管理员用户使用 ak 和 sk，通过 admin-sdk 可以读写资源。
+s3-database 的权限控制基于对象储存本身。匿名用户通过 user-sdk 可以读取文件，管理员用户使用 ak 和 sk，通过 admin-sdk 可以读写文件。
 
 s3-database 的优点在于数据静态化，缓存友好、CDN 友好，同时不需要后端，运维方便，稳定性高。此外，s3-database 可以非常方便的处理键值型数据，后端如果用关系型数据库实现则会相当麻烦。
 
