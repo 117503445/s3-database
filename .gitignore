@@ -78,3 +78,5 @@ typings/
 *.tsbuildinfo
 lib/
 test/config/conf.json
+
+.DS_Store

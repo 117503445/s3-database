@@ -1,7 +1,7 @@
 {
   "name": "@t117503445/s3-database",
   "version": "0.3.0",
-  "description": "JavaScript SDK uses S3 as the database and does not require a backend.",
+  "description": "JavaScript SDK uses S3 as the data source, to build applications that don't need a backend.",
   "main": "index.js",
   "scripts": {
     "build": "tsc -p ./config/tsconfig.build.json",
