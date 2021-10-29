@@ -1,0 +1,4 @@
+{
+  "entryPoints": ["../src/admin/AdminClient.ts","../src/admin/AdminClientConfig.ts","../src/admin/AdminRestClient.ts","../src/user/UserClient.ts","../src/user/UserRestClient.ts"],
+  "out": "../doc"
+}

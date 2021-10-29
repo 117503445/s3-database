@@ -2,13 +2,15 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:51:01
  * @Description:
- * @LastEditTime: 2021-10-29 00:40:49
+ * @LastEditTime: 2021-10-29 11:36:26
  * @LastEditors: HaoTian Qi
  */
 
-import AdminClient from "./AdminClient";
-
-export default class AdminRestClient extends AdminClient {
+import { AdminClient } from "./AdminClient";
+/**
+ * Admin REST 风格操作文件的 Client
+ */
+export class AdminRestClient extends AdminClient {
   /**
    * 设置文件为空数组
    */

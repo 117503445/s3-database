@@ -80,3 +80,4 @@ lib/
 test/config/conf.json
 
 .DS_Store
+doc/

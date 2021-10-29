@@ -7,3 +7,4 @@ test/
 .npmignore
 tsconfig.*
 tslint.json
+doc/

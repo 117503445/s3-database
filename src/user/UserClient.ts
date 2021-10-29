@@ -2,17 +2,17 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 13:00:46
  * @Description:
- * @LastEditTime: 2021-10-23 13:00:53
+ * @LastEditTime: 2021-10-29 11:37:01
  * @LastEditors: HaoTian Qi
  */
 import axios from "axios";
-
-export default class UserClient {
+/**
+ * User 直接操作文件的 Client
+ */
+export class UserClient {
   host: string;
   name: string;
-  /**
-   * User 操作文件的 Client
-   */
+
   constructor(host: string, name: string) {
     this.host = host;
     this.name = name;

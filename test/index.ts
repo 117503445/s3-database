@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-21 16:46:00
  * @Description:
- * @LastEditTime: 2021-10-23 10:59:39
+ * @LastEditTime: 2021-10-29 11:28:37
  * @LastEditors: HaoTian Qi
  */
 
@@ -10,8 +10,8 @@ var assert = require("assert");
 
 import conf from "./config/conf.json";
 
-import UserRestClient from "../src/user/UserRestClient";
-import AdminRestClient from "../src/admin/AdminRestClient";
+import { UserRestClient } from "../src/user/UserRestClient";
+import { AdminRestClient } from "../src/admin/AdminRestClient";
 
 interface Task {
   title: string;
@@ -69,14 +69,14 @@ describe("AdminRestClient", function () {
 });
 
 describe("UserRestClient", function () {
-  const userController = new UserRestClient(conf["Host"], "test.json");
+  const userRestClient = new UserRestClient(conf["Host"], "test.json");
   it("getAll", async function () {
-    let items = (await userController.getAll()) as Task[];
+    let items = (await userRestClient.getAll()) as Task[];
     assert.equal(items[0].lastUpdate, date);
     assert.equal(items.length, 3);
   });
   it("getOne", async function () {
-    let item = (await userController.getOne(2)) as Task;
+    let item = (await userRestClient.getOne(2)) as Task;
     assert.equal(item.title, "任务4");
   });
 });

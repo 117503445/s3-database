@@ -14,12 +14,17 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-      - name: build lib
+      - name: build
         run: |
           npm install -g yarn
           yarn install
           yarn build
+          yarn doc
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: "public"
+      - uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: doc # The folder the action should deploy.

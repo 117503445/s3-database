@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-10-29 00:29:42
+ * @LastEditTime: 2021-10-29 11:36:20
  * @LastEditors: HaoTian Qi
  */
 
@@ -13,7 +13,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { Readable } from "stream";
 
-import AdminClientConfig from "./AdminClientConfig";
+import { AdminClientConfig } from "./AdminClientConfig";
 
 function streamToString(stream: Readable): Promise<string> {
   // https://stackoverflow.com/a/49428486/12608675
@@ -28,14 +28,14 @@ function streamToString(stream: Readable): Promise<string> {
     stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
   });
 }
-
-export default class AdminClient {
+/**
+ * Admin 直接操作文件的 Client
+ */
+export class AdminClient {
   s3client: S3Client;
   name: string;
   bucket: string;
-  /**
-   * Admin 操作文件的 Client
-   */
+
   constructor(conf: AdminClientConfig, name: string) {
     this.s3client = new S3Client(conf);
     this.name = name;
