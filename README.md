@@ -14,6 +14,10 @@ s3-database 不能取代后端。s3-database 的局限在于，每次只能读�
 
 ## Getting Started
 
+### 安装
+
+`yarn add @t117503445/s3-database`
+
 ### 准备测试文件
 
 先按照 wiki，创建一个支持 S3 接口的 对象储存。以 `https://s3-crud.oss-cn-hangzhou.aliyuncs.com` 为例。
