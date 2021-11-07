@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-10-29 11:36:20
+ * @LastEditTime: 2021-11-07 23:11:04
  * @LastEditors: HaoTian Qi
  */
 
@@ -16,16 +16,17 @@ import { Readable } from "stream";
 import { AdminClientConfig } from "./AdminClientConfig";
 
 function streamToString(stream: Readable): Promise<string> {
-  // https://stackoverflow.com/a/49428486/12608675
-  const chunks: Array<any> = [];
-  return new Promise((resolve, reject) => {
-    stream.on(
-      "data",
-      (chunk: WithImplicitCoercion<ArrayBuffer | SharedArrayBuffer>) =>
-        chunks.push(Buffer.from(chunk))
-    );
-    stream.on("error", (err: any) => reject(err));
-    stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+  //   https://stackoverflow.com/a/36944450
+
+  return new Promise(async (resolve, reject) => {
+    let responseDataChunks = [];
+
+    // Attach a 'data' listener to add the chunks of data to our array
+    // Each chunk is a Buffer instance
+    stream.on("data", (chunk) => responseDataChunks.push(chunk));
+
+    // Once the stream has no more data, join the chunks into a string and return the string
+    stream.once("end", () => resolve(responseDataChunks.join("")));
   });
 }
 /**
