@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-11-07 23:15:41
+ * @LastEditTime: 2021-11-07 23:56:39
  * @LastEditors: HaoTian Qi
  */
 
@@ -11,24 +11,9 @@ import {
   GetObjectCommand,
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
-import { Readable } from "stream";
-
+import { Response } from "node-fetch";
 import { AdminClientConfig } from "./AdminClientConfig";
 
-function streamToString(stream: Readable): Promise<string> {
-  //   https://stackoverflow.com/a/36944450
-
-  return new Promise(async (resolve, reject) => {
-    let responseDataChunks = [] as any[];
-
-    // Attach a 'data' listener to add the chunks of data to our array
-    // Each chunk is a Buffer instance
-    stream.on("data", (chunk) => responseDataChunks.push(chunk));
-
-    // Once the stream has no more data, join the chunks into a string and return the string
-    stream.once("end", () => resolve(responseDataChunks.join("")));
-  });
-}
 /**
  * Admin 直接操作文件的 Client
  */
@@ -53,7 +38,7 @@ export class AdminClient {
     let input = { Bucket: this.bucket, Key: this.name };
     const command = new GetObjectCommand(input);
     let response = await this.s3client.send(command);
-    let result = await streamToString(response.Body as Readable);
+    let result = await new Response(response.Body as any).text();
 
     try {
       return JSON.parse(result);
