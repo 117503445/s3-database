@@ -2,20 +2,26 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 13:00:46
  * @Description:
- * @LastEditTime: 2021-10-29 11:37:01
+ * @LastEditTime: 2021-11-01 00:30:05
  * @LastEditors: HaoTian Qi
  */
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 /**
  * User 直接操作文件的 Client
  */
 export class UserClient {
   host: string;
   name: string;
+  axios: AxiosInstance;
 
   constructor(host: string, name: string) {
     this.host = host;
     this.name = name;
+    this.axios = axios.create({
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
   }
   /**
    * 读取文件
@@ -24,7 +30,7 @@ export class UserClient {
    */
   async get(): Promise<any> {
     let url = `${this.host}/${this.name}`;
-    let response = await axios.get(url);
+    let response = await this.axios.get(url);
 
     let data = response.data;
     return data;

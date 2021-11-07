@@ -32,7 +32,7 @@ s3-database 不能取代后端。s3-database 的局限在于，每次只能读�
 
 ### JS 访问
 
-`yarn add @t117503445/s3-database`
+安装依赖 `yarn add @t117503445/s3-database`
 
 ```js
 import UserRestClient from "../src/user/UserRestClient";
@@ -43,6 +43,10 @@ const client = new UserRestClient(
 let items = await userController.getAll();
 console.log(items);
 ```
+
+## API 文档
+
+<https://www.117503445.top/s3-database>
 
 ## Authors
 
