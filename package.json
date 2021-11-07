@@ -1,6 +1,6 @@
 {
   "name": "@t117503445/s3-database",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JavaScript SDK uses S3 as the data source, to build applications that don't need a backend.",
   "main": "index.js",
   "scripts": {
