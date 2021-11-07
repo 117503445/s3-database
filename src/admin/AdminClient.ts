@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-11-07 23:11:04
+ * @LastEditTime: 2021-11-07 23:15:41
  * @LastEditors: HaoTian Qi
  */
 
@@ -19,7 +19,7 @@ function streamToString(stream: Readable): Promise<string> {
   //   https://stackoverflow.com/a/36944450
 
   return new Promise(async (resolve, reject) => {
-    let responseDataChunks = [];
+    let responseDataChunks = [] as any[];
 
     // Attach a 'data' listener to add the chunks of data to our array
     // Each chunk is a Buffer instance
