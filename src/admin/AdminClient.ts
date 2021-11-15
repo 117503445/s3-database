@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-11-07 23:56:39
+ * @LastEditTime: 2021-11-15 11:31:43
  * @LastEditors: HaoTian Qi
  */
 
@@ -59,4 +59,15 @@ export class AdminClient {
     const command = new PutObjectCommand(input);
     return this.s3client.send(command);
   }
+
+  /**
+   * 写入原始文件
+   *
+   * @param content - 要写入的 JS 对象
+   */
+     async setRaw(content: any) {
+      let input = { Bucket: this.bucket, Body: content, Key: this.name };
+      const command = new PutObjectCommand(input);
+      return this.s3client.send(command);
+    }
 }
