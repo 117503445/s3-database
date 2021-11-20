@@ -2,15 +2,32 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:51:01
  * @Description:
- * @LastEditTime: 2021-10-29 11:36:26
+ * @LastEditTime: 2021-11-20 18:20:31
  * @LastEditors: HaoTian Qi
  */
 
 import { AdminClient } from "./AdminClient";
+import { AdminClientConfig } from "./AdminClientConfig";
+
 /**
  * Admin REST 风格操作文件的 Client
  */
 export class AdminRestClient extends AdminClient {
+  name: string;
+
+  constructor(conf: AdminClientConfig, name: string) {
+    super(conf);
+    this.name = name;
+  }
+
+  async set(content: any) {
+    return super.set(this.name, content);
+  }
+
+  async get() {
+    return super.get(this.name);
+  }
+
   /**
    * 设置文件为空数组
    */

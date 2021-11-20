@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-22 00:50:37
  * @Description:
- * @LastEditTime: 2021-10-29 11:37:10
+ * @LastEditTime: 2021-11-20 18:28:50
  * @LastEditors: HaoTian Qi
  */
 
@@ -11,6 +11,16 @@ import { UserClient } from "./UserClient";
  * User REST 风格操作文件的 Client
  */
 export class UserRestClient extends UserClient {
+  name: string;
+  constructor(host: string, name: string) {
+    super(host);
+    this.name = name;
+  }
+
+  async get(): Promise<any> {
+    return super.get(this.name);
+  }
+
   /**
    * 读取数组文件
    *
