@@ -16,7 +16,7 @@ s3-database 不能取代后端。s3-database 的局限在于，每次只能读�
 
 ### 准备测试文件
 
-先按照 wiki，创建一个支持 S3 接口的 对象储存。以 `https://s3-crud.oss-cn-hangzhou.aliyuncs.com` 为例。
+先按照 [wiki](https://github.com/117503445/s3-database/wiki/%E5%BB%BA%E7%AB%8B-%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98-Bucket)，创建一个支持 S3 接口的 对象储存。以 `https://s3-crud.oss-cn-hangzhou.aliyuncs.com` 为例。
 
 创建 `./test.json`, 内容为
 
