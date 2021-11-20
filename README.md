@@ -34,15 +34,36 @@ s3-database 不能取代后端。s3-database 的局限在于，每次只能读�
 
 安装依赖 `yarn add @t117503445/s3-database`
 
+对于前台，使用 UserClient，只能进行读操作。
+
 ```js
-import UserRestClient from "../src/user/UserRestClient";
-const client = new UserRestClient(
-  "https://s3-crud.oss-cn-hangzhou.aliyuncs.com",
-  "test.json"
+import { UserClient } from "@t117503445/s3-database/user/UserClient";
+const userClient = new UserClient(
+  "https://s3-crud.oss-cn-hangzhou.aliyuncs.com"
 );
-let items = await userController.getAll();
-console.log(items);
+const response = await userClient.get("kv.json"); // 获取 kv.json 的值，返回为 JS 对象
 ```
+
+对于后台，使用 AdminClient，可以进行读写操作。
+
+```js
+import { AdminClient } from "@t117503445/s3-database/admin/AdminClient";
+const conf = {
+  region: "oss-cn-hangzhou",
+  endpoint: "https://oss-cn-hangzhou.aliyuncs.com",
+  credentials: {
+    accessKeyId: "LTAI5tGeQxdU1xYjrjd8EJEU",
+    secretAccessKey: "",
+  },
+  Bucket: "s3-crud",
+}; // 根据 OSS 相关信息进行更改
+
+const adminClient = new AdminClient(conf);
+adminClient.set("kv.json", { key: "value" }); // 设置 kv.json 的值，传入 JS 对象
+const response = await adminClient.get("kv.json"); // 获取 kv.json 的值，返回为 JS 对象
+```
+
+对应的，有 UserRestClient 和 AdminRestClient，对 REST 操作进行了封装，详情见 API 文档。
 
 ## API 文档
 

@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-21 16:46:00
  * @Description:
- * @LastEditTime: 2021-10-29 11:28:37
+ * @LastEditTime: 2021-11-20 18:39:29
  * @LastEditors: HaoTian Qi
  */
 
@@ -69,7 +69,7 @@ describe("AdminRestClient", function () {
 });
 
 describe("UserRestClient", function () {
-  const userRestClient = new UserRestClient(conf["Host"], "test.json");
+  const userRestClient = new UserRestClient("https://s3-crud.oss-cn-hangzhou.aliyuncs.com", "test.json");
   it("getAll", async function () {
     let items = (await userRestClient.getAll()) as Task[];
     assert.equal(items[0].lastUpdate, date);

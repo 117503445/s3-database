@@ -5,6 +5,5 @@
     "accessKeyId": "LTAI5tGeQxdU1xYjrjd8EJEU",
     "secretAccessKey": ""
   },
-  "Bucket": "s3-crud",
-  "Host": "https://s3-crud.oss-cn-hangzhou.aliyuncs.com"
+  "Bucket": "s3-crud"
 }
