@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-10-23 10:49:15
  * @Description:
- * @LastEditTime: 2021-11-20 18:05:13
+ * @LastEditTime: 2021-11-24 23:59:37
  * @LastEditors: HaoTian Qi
  */
 
@@ -25,6 +25,26 @@ export class AdminClient {
     this.s3client = new S3Client(conf);
     this.bucket = conf.Bucket;
   }
+
+  /**
+   * 尝试进行写入操作，判断是否可用
+   * @returns 返回报错字符串，如果成功则返回 undefined
+   */
+  async tryWrite() {
+    try {
+      await this.set("S3-DATABASE-ADMIN-TEST.json", "test");
+    } catch (error) {
+      // console.error(error);
+
+      if (error.Code != undefined) {
+        return error.Code as string;
+      } else {
+        return JSON.stringify(error);
+      }
+    }
+    return undefined;
+  }
+
   /**
    * 读取文件
    *

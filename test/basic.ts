@@ -2,7 +2,7 @@
  * @Author: HaoTian Qi
  * @Date: 2021-11-20 18:35:58
  * @Description:
- * @LastEditTime: 2021-11-20 19:12:33
+ * @LastEditTime: 2021-11-25 00:01:09
  * @LastEditors: HaoTian Qi
  */
 
@@ -16,7 +16,31 @@ const data = {
 };
 
 describe("AdminClient", function () {
+  it("isAvailable InvalidAccessKeyId", async function () {
+    const adminClient = new AdminClient({
+      region: "oss-cn-hangzhou",
+      endpoint: "https://oss-cn-hangzhou.aliyuncs.com",
+      credentials: {
+        accessKeyId: "123",
+        secretAccessKey: "456",
+      },
+      Bucket: "s3-crud",
+    });
+    assert.equal(await adminClient.tryWrite(), "InvalidAccessKeyId");
+  });
+
+  it("isAvailable bucket", async function () {
+    const c = JSON.parse(JSON.stringify(conf));
+    c["Bucket"] = "s3";
+    const adminClient = new AdminClient(c);
+    assert.equal(await adminClient.tryWrite(), "InvalidBucketName");
+  });
+
   const adminClient = new AdminClient(conf);
+
+  it("isAvailable bucket", async function () {
+    assert.equal(await adminClient.tryWrite(), undefined);
+  });
 
   it("set", async function () {
     adminClient.set("kv.json", data);

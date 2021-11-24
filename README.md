@@ -61,6 +61,8 @@ const conf = {
 const adminClient = new AdminClient(conf);
 adminClient.set("kv.json", { key: "value" }); // 设置 kv.json 的值，传入 JS 对象
 const response = await adminClient.get("kv.json"); // 获取 kv.json 的值，返回为 JS 对象
+
+const errMessage = await adminClient.tryWrite(); // 尝试写入操作，返回错误信息。成功时返回 undefined。可用于后台登录时判断 sk 是否正确。
 ```
 
 对应的，有 UserRestClient 和 AdminRestClient，对 REST 操作进行了封装，详情见 API 文档。
