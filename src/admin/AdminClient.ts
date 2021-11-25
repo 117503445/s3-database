@@ -33,7 +33,7 @@ export class AdminClient {
   async tryWrite() {
     try {
       await this.set("S3-DATABASE-ADMIN-TEST.json", "test");
-    } catch (error) {
+    } catch (error: any) {
       // console.error(error);
 
       if (error.Code != undefined) {
